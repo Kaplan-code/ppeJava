@@ -29,11 +29,22 @@ public class DAOLogin extends DAOGeneric<Utilisateur> {
 		query.setString("mdp",mdp);
 		conect =  (String) query.uniqueResult();
 		
-		
-	    
-		
 		return conect;
 	}
 	
+	public Utilisateur getUser(String log, String mdp) {
+		
+		String SQL = "SELECT* FROM Utilisateur WHERE login=:log and password=:mdp";
+		
+		
+		SQLQuery query = session.createSQLQuery(SQL);
+		query.setString("log", log);
+		query.setString("mdp",mdp);
+		query.addEntity(entityClass);
+		Utilisateur conect = (Utilisateur) query.uniqueResult();
+		
+		return conect;
+		
+	}
 
 }

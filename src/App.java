@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import DAO.DAOAffichage;
+import DAO.DAOFicheMed;
 import DAO.DAOLogin;
 import entities.Medecin;
 import entities.Utilisateur;
@@ -12,6 +13,7 @@ import util.HibernateUtil;
 import util.TestConnection;
 import views.affichage;
 import views.connexion;
+import views.ficheMed;
 
 public class App {
 
@@ -23,10 +25,12 @@ public class App {
 		
 		
 		try {
-			new UserController(new connexion(), new DAOLogin(session, Utilisateur.class));
+			new LoginController(new connexion(), new DAOLogin(session, Utilisateur.class));
 		} catch (HibernateException e) {
 		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		
+		
 	}
 }

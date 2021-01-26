@@ -16,19 +16,20 @@ import org.omg.CORBA.portable.ValueOutputStream;
 import DAO.DAOAffichage;
 import DAO.DAOLogin;
 import entities.Medecin;
+import entities.Utilisateur;
 import util.HibernateUtil;
 import views.affichage;
 import views.connexion;
 
-public class UserController implements ActionListener {
+public class LoginController implements ActionListener {
 	connexion fenetre;
 	DAOLogin daoutilisateur;
 	affichage affichage;
 	
-	public UserController()  {
+	public LoginController()  {
 	}
 	
-	public UserController(connexion f,DAOLogin daoUtilisateur) {
+	public LoginController(connexion f,DAOLogin daoUtilisateur) {
 		this.daoutilisateur = daoUtilisateur;
 		this.fenetre = f;
 		
@@ -67,7 +68,9 @@ public class UserController implements ActionListener {
 		if (pssw.equals(mdpSha)) {
 			System.out.println("bon");
 			
-			DeuxiemmeFenetre(); //Ouvre la 2eme vue
+			Utilisateur user = daoutilisateur.getUser(fenetre.getTextIdentif().getText(), mdpSha); //recupere l'utilisateur
+			
+			DeuxiemmeFenetre(user); //Ouvre la 2eme vue
 			
 			fenetre.setVisible(false);
 		 }	
@@ -94,12 +97,12 @@ public class UserController implements ActionListener {
 	    }
 	} 
 	
-	public void DeuxiemmeFenetre() {
+	public void DeuxiemmeFenetre(Utilisateur user) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
 		try {
-			new AffichageController(new affichage(), new DAOAffichage(session, Medecin.class));
+			new AffichageController(new affichage(), new DAOAffichage(session, Medecin.class),user);
 		} catch (HibernateException e) {
 		// TODO Auto-generated catch block
 			e.printStackTrace();

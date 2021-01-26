@@ -83,6 +83,8 @@ public class MyDefaultModel extends DefaultTableModel {
 		}
 		return type;
 	}
+	
+	
 }
 
 

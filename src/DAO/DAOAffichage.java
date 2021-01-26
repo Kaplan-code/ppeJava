@@ -6,6 +6,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import entities.Medecin;
+import entities.Role;
 
 public class DAOAffichage extends DAOGeneric<Medecin> {
 
@@ -25,7 +26,7 @@ public class DAOAffichage extends DAOGeneric<Medecin> {
 		return medecins; 
 	}
 	
-public List<Medecin> findCountriesStartingWith(String c) {
+    public List<Medecin> findCountriesStartingWith(String c) {
 
 		String SQL = "SELECT * FROM Medecin WHERE ville LIKE :name";
 		SQLQuery query = session.createSQLQuery(SQL);
@@ -35,6 +36,21 @@ public List<Medecin> findCountriesStartingWith(String c) {
 		
 		return medecins;
 	}
+
+    /*
+   public Role getUserRole(String id) {
+		//Integer conect = null;
+		String SQL = "SELECT * FROM Role WHERE id=:id ";
+		
+		
+		SQLQuery query = session.createSQLQuery(SQL);
+		query.setString("id", id);
+		query.addEntity(entityClass);
+		Role conect =  (Role) query.uniqueResult();
+		
+		return conect;
+}
+*/
 
 }
 
