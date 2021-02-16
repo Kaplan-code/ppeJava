@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+
 
 /**
  * The persistent class for the Medecin database table.
@@ -21,15 +23,15 @@ public class Medecin implements Serializable {
 	//private byte disponibilite;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	@Column(name="id")
-	private int id;
+	private Integer id;
 
 	private String nom;
 
 	private String numeroTel;
 
-	private String prenom;
+	private String prenom; 
 
 	private String ville;
 
@@ -62,11 +64,11 @@ public class Medecin implements Serializable {
 	}
 	*/
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

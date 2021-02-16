@@ -23,7 +23,7 @@ public abstract class DAOGeneric<T > {
 		T entity = (T) session.get(entityClass, id);
 		return entity;
 	}
-	
+	 
 	public void saveOrUpdate(T entity) {
 		session.beginTransaction();
 		session.saveOrUpdate(entity);

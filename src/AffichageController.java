@@ -18,13 +18,17 @@ import org.hibernate.SessionFactory;
 import DAO.DAOAffichage;
 import DAO.DAOFicheMed;
 import DAO.DAOLogin;
+import DAO.DAORapportRdv;
 import entities.Medecin;
+import entities.RapportRdv;
 import entities.Role;
 import entities.Utilisateur;
+import model.MyDefaultModel;
 import util.HibernateUtil;
 import views.affichage;
 import views.connexion;
 import views.ficheMed;
+import views.rapportRdv;
 
 public class AffichageController implements ActionListener {
 	affichage fenetre;
@@ -46,15 +50,13 @@ public class AffichageController implements ActionListener {
 		
 		init();
 		
-		
 		fenetre.getBtnRecherche().addActionListener(this);
-		
-		fenetre.getBtnDeconnexion().addActionListener(this);
-		
+      	fenetre.getBtnDeconnexion().addActionListener(this);
+		fenetre.getBtnAfificherRdv().addActionListener(this);
 		fenetre.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
-			public void valueChanged(ListSelectionEvent evt) {
+			public void valueChanged(ListSelectionEvent evt) { 
 				// TODO Auto-generated method stub
 				//String msg = model.getValueAt(i,0).toString();
 				
@@ -63,7 +65,7 @@ public class AffichageController implements ActionListener {
 						int selectedRow = fenetre.getTable().getSelectedRow();
 						Medecin m = medecins.get(selectedRow);
 						
-				        TroisiemeFenetre(m);
+				        TroisiemeFenetre(m,user);
 				        
 					 }
 				}
@@ -73,7 +75,12 @@ public class AffichageController implements ActionListener {
 	
 	
     public void init() { 
-    	//Role user1 =daoaffichage.getUserRole(user.getIdrole());
+    	//Role user1 =daoaffichage.getUserRole(user.getIdrole()); 
+    	if (user.getIdrole().getId()==1) {
+			fenetre.getBtnAfificherRdv().setVisible(false);
+			fenetre.getLblAfificher().setVisible(false);
+		} 
+    	
     	fenetre.getLblNom().setText(user.getNom());
     	fenetre.getLblRole().setText(user.getIdrole().getLibelle());
 		
@@ -87,8 +94,7 @@ public class AffichageController implements ActionListener {
 		
 	}
     public void doSearch() {
-    	
-    	
+    
     	
     	medecins = daoaffichage.findCountriesStartingWith(fenetre.getTextVilleMed().getText());
     	
@@ -110,18 +116,29 @@ public class AffichageController implements ActionListener {
 		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
     	
     }
     
-    public void TroisiemeFenetre(Medecin medecin) {
+    public void doAffiche() {
     	SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
 		
 		try {
-			new FicheMedecinController(new ficheMed(), new DAOFicheMed(session, Medecin.class),medecin);
+			new RapportRdvController(new rapportRdv(), new DAORapportRdv(session, RapportRdv.class));
+		} catch (HibernateException e) {
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    public void TroisiemeFenetre(Medecin medecin, Utilisateur user) {
+    	SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		
+		
+		try {
+			new FicheMedecinController(new ficheMed(), new DAOFicheMed(session, Medecin.class),medecin, user);
 		} catch (HibernateException e) {
 		// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,6 +157,9 @@ public class AffichageController implements ActionListener {
 			}
 		if(src =="Déconnexion") {
 			doDeconect();
+		}
+		if(src =="Afficher") {
+			doAffiche();
 		}
 
 	}

@@ -63,10 +63,10 @@ public class LoginController implements ActionListener {
 		}
 		else {
 		
-		System.out.println(mdpSha);
-		System.out.println(pssw);
+		//System.out.println(mdpSha);
+		//System.out.println(pssw);
 		if (pssw.equals(mdpSha)) {
-			System.out.println("bon");
+			//System.out.println("bon");
 			
 			Utilisateur user = daoutilisateur.getUser(fenetre.getTextIdentif().getText(), mdpSha); //recupere l'utilisateur
 			

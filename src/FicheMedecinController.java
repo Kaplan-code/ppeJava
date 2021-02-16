@@ -6,22 +6,28 @@ import javax.swing.table.DefaultTableModel;
 
 import DAO.DAOFicheMed;
 import entities.Medecin;
+import entities.RapportRdv;
+import entities.Utilisateur;
 import views.affichage;
 import views.ficheMed;
 
 public class FicheMedecinController implements ActionListener {
 	ficheMed fenetre;
 	DAOFicheMed daoficheMed;
-	
+	Utilisateur user;
 	Medecin medecin;
 	List<Medecin> medecins;
+	RapportRdv rapport;
 	
-	public FicheMedecinController(ficheMed f, DAOFicheMed daoficheMed,Medecin m) {
+	public FicheMedecinController(ficheMed f, DAOFicheMed daoficheMed,Medecin medecin, Utilisateur user) {
 		this.fenetre = f;
 		this.daoficheMed = daoficheMed;
-		this.medecin = m;
+		this.medecin = medecin;
+		this.user = user;
 		
-		init(m);
+		
+		
+		init(medecin);
 		
 		fenetre.getBtnQuitter().addActionListener(this);
 		fenetre.getBtnValider().addActionListener(this);
@@ -33,24 +39,34 @@ public class FicheMedecinController implements ActionListener {
 	
 	
 	
-	public void init(Medecin m) {
+	public void init(Medecin medecin) {
 		fenetre.setVisible(true);
 		
-		fenetre.getTextNom().setText(m.getNom());
-		fenetre.getTextPrenom().setText(m.getPrenom());
-		fenetre.getTextVille().setText(m.getVille());
-		fenetre.getTextNuméro().setText(m.getNumeroTel());
-		fenetre.getTextAdresse().setText(m.getAdresse());
-		fenetre.getTextCodePostal().setText(m.getCodePostal());
+		fenetre.getTextNom().setText(medecin.getNom());
+		fenetre.getTextPrenom().setText(medecin.getPrenom());
+		fenetre.getTextVille().setText(medecin.getVille());
+		fenetre.getTextNuméro().setText(medecin.getNumeroTel());
+		fenetre.getTextAdresse().setText(medecin.getAdresse());
+		fenetre.getTextCodePostal().setText(medecin.getCodePostal());
 	}
 
 	public void doLeave() {
+		
 		fenetre.dispose();
+		
 		
 	}
 	
 	public void doValide() {
 		
+		System.out.println("choser : " + fenetre.getDateChooser().getDate());
+		System.out.println("user : " + user);
+		System.out.println("medecin : " + medecin);
+        //System.out.println("dao : " + daoficheMed.addRdv(fenetre.getDateChooser().getDate(), user.getId(), medecin.getId()));
+		//daoficheMed.addRdv(fenetre.getDateChooser().getDate(), user.getId(), medecin.getId());
+		
+		daoficheMed.addRdv2(fenetre.getDateChooser().getDate(), user, medecin);
+		//fenetre.dispose();
 	}
 
 	@Override

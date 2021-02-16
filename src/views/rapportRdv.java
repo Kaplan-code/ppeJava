@@ -11,11 +11,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
 
-public class RapportRdv extends JFrame {
+public class rapportRdv extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JButton btnQuitter;
 
 	/**
 	 * Launch the application.
@@ -24,7 +26,7 @@ public class RapportRdv extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RapportRdv frame = new RapportRdv();
+					rapportRdv frame = new rapportRdv();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,16 +38,18 @@ public class RapportRdv extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RapportRdv() {
+	public rapportRdv() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 808, 525);
+		setBounds(100, 100, 899, 604);
 		contentPane = new JPanel();
+		contentPane.setName("Quitter");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		this.setLocationRelativeTo(null); //center
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(147, 180, 493, 286);
+		scrollPane.setBounds(215, 202, 493, 286);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -63,7 +67,17 @@ public class RapportRdv extends JFrame {
 		
 		JLabel label = new JLabel("Rapport des Rendez-vous :");
 		label.setFont(new Font("Dialog", Font.BOLD, 16));
-		label.setBounds(267, 43, 245, 15);
+		label.setBounds(314, 127, 245, 15);
 		contentPane.add(label);
+		
+		btnQuitter = new JButton("Quitter");
+		btnQuitter.setBounds(704, 516, 117, 25);
+		contentPane.add(btnQuitter);
+	}
+	public JButton getBtnQuitter() {
+		return btnQuitter;
+	}
+	public JTable getTable() {
+		return table;
 	}
 }

@@ -31,7 +31,12 @@ public class DAOLogin extends DAOGeneric<Utilisateur> {
 		
 		return conect;
 	}
-	
+	/**
+	 * 
+	 * @param log
+	 * @param mdp
+	 * @return
+	 */
 	public Utilisateur getUser(String log, String mdp) {
 		
 		String SQL = "SELECT* FROM Utilisateur WHERE login=:log and password=:mdp";

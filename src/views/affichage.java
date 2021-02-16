@@ -27,6 +27,7 @@ public class affichage extends JFrame {
 	private JLabel lblRole;
 	private JButton btnDeconnexion;
 	private JButton btnAfificherToutLes;
+	private JLabel lblAfificherToutLes;
 
 	/**
 	 * Launch the application.
@@ -126,7 +127,7 @@ public class affichage extends JFrame {
 		btnAfificherToutLes.setBounds(241, 7, 118, 25);
 		contentPane.add(btnAfificherToutLes);
 		
-		JLabel lblAfificherToutLes = new JLabel("Afificher tout les rendez-vous :");
+		lblAfificherToutLes = new JLabel("Afificher tout les rendez-vous :");
 		lblAfificherToutLes.setBounds(12, 12, 225, 15);
 		contentPane.add(lblAfificherToutLes);
 	}
@@ -150,5 +151,8 @@ public class affichage extends JFrame {
 	}
 	public JButton getBtnAfificherRdv() {
 		return btnAfificherToutLes;
+	}
+	public JLabel getLblAfificher() {
+		return lblAfificherToutLes;
 	}
 }
