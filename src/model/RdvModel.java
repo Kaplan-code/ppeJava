@@ -1,28 +1,31 @@
-import java.util.HashSet;
+package model;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-
 import entities.Medecin;
+import entities.RapportRdv;
+import entities.Utilisateur;
 
-public class MyDefaultModel extends DefaultTableModel {
+public class RdvModel extends DefaultTableModel  {
+	
 	private Medecin medecin;
+	private Utilisateur user;
+	private RapportRdv rapport;
 	public List<Medecin> medecins;
+	public List<Utilisateur> users;
+	public List<RapportRdv> rapports;
 	private String[] ColumnNames = {
-			"Prenom",
-			"Nom",
-			"Ville"
+			"Date",
+			"Id_Utilisateur",
+			"Id_Medecin"
 	};
 	
-	
-	
-	
-	public MyDefaultModel(List<Medecin> medecins) {
-		this.medecins = medecins; 
+	public RdvModel(List<RapportRdv> rapports ) {
+		this.rapports = rapports;
+		
 	}
-	
-	
 	
 	@Override
 	public Object getValueAt(int row, int column) {
@@ -30,11 +33,11 @@ public class MyDefaultModel extends DefaultTableModel {
 		switch(column) {
 		
 		case 0:
-			return medecins.get(row).getPrenom();
+			return rapports.get(row).getDate();
 		case 1:
-			return medecins.get(row).getNom();
+			return rapports.get(row).getUtilisateurId().getNom();
 		case 2:
-			return medecins.get(row).getVille();
+			return rapports.get(row).getMedecinId().getNom();
 		default:
 			return "";
 		}
@@ -49,7 +52,7 @@ public class MyDefaultModel extends DefaultTableModel {
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return medecins == null ? 0 : medecins.size();
+		return rapports == null ? 0 : rapports.size();
 	}
 	
 	@Override
@@ -72,19 +75,18 @@ public class MyDefaultModel extends DefaultTableModel {
 		Class<?> type=null;
 		switch (columnIndex) {
 		case 0:
-			type = String.class;
+			type = Date.class;
 			break;
 		case 1:
-			type = String.class;
+			type = Integer.class;
 			break;
 		case 2:
-			type = String.class;
+			type = Integer.class;
 			break;	
 		}
 		return type;
 	}
 	
 	
+
 }
-
-
