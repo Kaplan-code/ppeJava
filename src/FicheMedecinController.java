@@ -1,7 +1,10 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.DAOFicheMed;
@@ -31,7 +34,7 @@ public class FicheMedecinController implements ActionListener {
 		
 		fenetre.getBtnQuitter().addActionListener(this);
 		fenetre.getBtnValider().addActionListener(this);
-		fenetre.getBtnValider().addActionListener(this);
+		
 		
 	}
 	
@@ -58,7 +61,17 @@ public class FicheMedecinController implements ActionListener {
 	}
 	
 	public void doValide() {
-		
+		Date champDate = fenetre.getDateChooser().getDate();
+		if(champDate==null) {
+			JFrame frame = new JFrame("showMessageDialog");
+		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    JOptionPane.showMessageDialog(frame,
+		            "Date vide",
+		            "Ressayez",
+		            JOptionPane.ERROR_MESSAGE);
+		    
+		}
+		else {
 		System.out.println("choser : " + fenetre.getDateChooser().getDate());
 		System.out.println("user : " + user);
 		System.out.println("medecin : " + medecin);
@@ -67,7 +80,7 @@ public class FicheMedecinController implements ActionListener {
 		
 		daoficheMed.addRdv2(fenetre.getDateChooser().getDate(), user, medecin);
 		//fenetre.dispose();
-	}
+	}}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {

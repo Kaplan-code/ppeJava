@@ -1,9 +1,13 @@
 package DAO;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+
 
 import entities.Medecin;
 import entities.RapportRdv;
@@ -23,6 +27,24 @@ public class DAORapportRdv extends DAOGeneric<RapportRdv> {
 		List<RapportRdv> rapports = query.list();
 		
 		return rapports; 
+	}
+	
+    public void delete(RapportRdv id){
+		
+		String SQL = "DELETE FROM RapportRdv WHERE id=:id";
+		SQLQuery query = session.createSQLQuery(SQL);
+		//query.addEntity(entityClass);
+		query.setInteger("id", id.getId());
+		
+		
+        session.beginTransaction();
+        
+		query.executeUpdate();
+		
+		session.getTransaction().commit();
+	    
+		
+
 	}
 
 }

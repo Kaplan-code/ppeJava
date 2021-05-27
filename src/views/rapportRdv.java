@@ -18,6 +18,7 @@ public class rapportRdv extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JButton btnQuitter;
+	private JButton btnSupprimer;
 
 	/**
 	 * Launch the application.
@@ -73,11 +74,19 @@ public class rapportRdv extends JFrame {
 		btnQuitter = new JButton("Quitter");
 		btnQuitter.setBounds(704, 516, 117, 25);
 		contentPane.add(btnQuitter);
+		
+		btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.setName("Supprimer");
+		btnSupprimer.setBounds(538, 516, 124, 25);
+		contentPane.add(btnSupprimer);
 	}
 	public JButton getBtnQuitter() {
 		return btnQuitter;
 	}
 	public JTable getTable() {
 		return table;
+	}
+	public JButton getBtnSupprimer() {
+		return btnSupprimer;
 	}
 }

@@ -23,7 +23,9 @@ public class RapportRdvController implements ActionListener {
 		
 		fenetre.getBtnQuitter().addActionListener(this);
 		
+		fenetre.getBtnSupprimer().addActionListener(this);
 		init();
+		
 	}
 	
 	public void init() {
@@ -41,6 +43,28 @@ public class RapportRdvController implements ActionListener {
 		fenetre.dispose();
 	}
 	
+	private void doSupprimer() {
+	
+	
+        
+        int row = fenetre.getTable().getSelectedRow();
+		//int column = 0;
+		
+		//int id = ((int) fenetre.getTable().getValueAt(row, column));
+		
+		RapportRdv rapport = rapports.get(row);
+		
+		daoRapportRdv.delete(rapport);
+		
+        rapports = daoRapportRdv.findAll();
+		
+		rdvmodel = new RdvModel(rapports);
+		fenetre.getTable().setModel(rdvmodel);
+		
+		
+
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
@@ -50,5 +74,8 @@ public class RapportRdvController implements ActionListener {
 		if(src =="Quitter") {
 		   	doQuit();
 			}
+		if(src =="Supprimer") {
+			doSupprimer();
+		}
 	}
 }

@@ -84,7 +84,7 @@ public class AffichageController implements ActionListener {
     	fenetre.getLblNom().setText(user.getNom());
     	fenetre.getLblRole().setText(user.getIdrole().getLibelle());
 		
-		medecins = daoaffichage.findAll();
+		medecins = daoaffichage.findAll(); 
 		
 	
 		myDTM = new MyDefaultModel(medecins);
