@@ -40,16 +40,18 @@ public class DAOFicheMed extends DAOGeneric<Medecin> {
 	 * Ajout d'un nouveau rendez-vous
 	 */
 	public void addRdv2(Date date, Utilisateur utilisateurId, Medecin medecinId ) { 
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		//Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		RapportRdv rapport = new RapportRdv();
+		rapport.setUtilisateurId(utilisateurId);
+		rapport.setMedecinId(medecinId);
+		rapport.setDate(date);
 		session.beginTransaction();
-		RapportRdv m = new RapportRdv();
-		m.setDate(date);
-		m.setMedecinId(medecinId);
-		m.setUtilisateurId(utilisateurId);
-		session.save(m);
+		
+		session.save(rapport);
 		
 		session.getTransaction().commit();
-	     
+		
 		
 	}
 }

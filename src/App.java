@@ -10,7 +10,6 @@ import DAO.DAOLogin;
 import entities.Medecin;
 import entities.Utilisateur;
 import util.HibernateUtil;
-import util.TestConnection;
 import views.affichage;
 import views.connexion;
 import views.ficheMed;
