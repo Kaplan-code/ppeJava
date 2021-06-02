@@ -33,7 +33,7 @@ public class FicheMedecinController implements ActionListener {
 		init(medecin);
 		
 		fenetre.getBtnQuitter().addActionListener(this);
-		fenetre.getBtnValider().addActionListener(this);
+		fenetre.getBtnValider().addActionListener(this); 
 		
 		
 	}
@@ -72,14 +72,15 @@ public class FicheMedecinController implements ActionListener {
 		    
 		}
 		else {
+			/*
 		System.out.println("choser : " + fenetre.getDateChooser().getDate());
 		System.out.println("user : " + user);
 		System.out.println("medecin : " + medecin);
         //System.out.println("dao : " + daoficheMed.addRdv(fenetre.getDateChooser().getDate(), user.getId(), medecin.getId()));
 		//daoficheMed.addRdv(fenetre.getDateChooser().getDate(), user.getId(), medecin.getId());
-		
+		*/
 		daoficheMed.addRdv2(fenetre.getDateChooser().getDate(), user, medecin);
-		//fenetre.dispose();
+		fenetre.dispose();
 	}}
 
 	@Override

@@ -110,11 +110,11 @@ public class affichage extends JFrame {
 		panel.add(btnRecherche);
 		
 		lblNom = new JLabel("nom");
-		lblNom.setBounds(631, 0, 70, 15);
+		lblNom.setBounds(587, 0, 70, 15);
 		contentPane.add(lblNom);
 		
 		lblRole = new JLabel("role du user");
-		lblRole.setBounds(754, 0, 118, 15);
+		lblRole.setBounds(701, 0, 159, 15);
 		contentPane.add(lblRole);
 		
 		btnDeconnexion = new JButton("Déconnexion");

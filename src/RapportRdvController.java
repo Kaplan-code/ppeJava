@@ -2,8 +2,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.transaction.SystemException;
+
 import DAO.DAORapportRdv;
 import entities.RapportRdv;
+import entities.Utilisateur;
 import model.MyDefaultModel;
 import model.RdvModel;
 import views.rapportRdv;
@@ -13,29 +16,43 @@ public class RapportRdvController implements ActionListener {
 	DAORapportRdv daoRapportRdv;
 	RdvModel rdvmodel;
 	public List<RapportRdv> rapports;
+	Utilisateur user;
 	
 	public RapportRdvController() {
 	}
 	
-	public RapportRdvController(rapportRdv f,DAORapportRdv daoRapportRdv) {
+	public RapportRdvController(rapportRdv f,DAORapportRdv daoRapportRdv, Utilisateur user) {
 		this.daoRapportRdv = daoRapportRdv;
 		this.fenetre = f;
+		this.user = user;
 		
 		fenetre.getBtnQuitter().addActionListener(this);
 		
 		fenetre.getBtnSupprimer().addActionListener(this);
-		init();
+		init(user);
 		
 	}
 	
-	public void init() {
+	public void init(Utilisateur user) {
 		
-		rapports = daoRapportRdv.findAll();
+		if (user.getIdrole().getId()==1) {
+			rapports = daoRapportRdv.findUser(user);
+			rdvmodel = new RdvModel(rapports); 
+			fenetre.getTable().setModel(rdvmodel);
+			System.out.println(user);
+			fenetre.setVisible(true);
+			fenetre.getBtnSupprimer().setVisible(false);
+		} else {
+			
 		
-		rdvmodel = new RdvModel(rapports);
-		fenetre.getTable().setModel(rdvmodel);
+			rapports = daoRapportRdv.findAll();
+			
+			rdvmodel = new RdvModel(rapports); 
+			fenetre.getTable().setModel(rdvmodel);
+			
+			fenetre.setVisible(true);
+	   }
 		
-		fenetre.setVisible(true);
 	}
 	
 	public void doQuit() {

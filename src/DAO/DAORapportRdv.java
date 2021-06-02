@@ -11,6 +11,7 @@ import org.hibernate.Session;
 
 import entities.Medecin;
 import entities.RapportRdv;
+import entities.Utilisateur;
 
 public class DAORapportRdv extends DAOGeneric<RapportRdv> {
 
@@ -29,7 +30,18 @@ public class DAORapportRdv extends DAOGeneric<RapportRdv> {
 		return rapports; 
 	}
 	
-    public void delete(RapportRdv id){
+	public List<RapportRdv> findUser(Utilisateur id){
+		String SQL ="Select * FROM RapportRdv WHERE utilisateurId=:id ";
+		SQLQuery query = session.createSQLQuery(SQL);
+		query.setInteger("id", id.getId());
+		query.addEntity(entityClass);
+		
+		List<RapportRdv> rapports = query.list();
+		
+		return rapports; 
+	}
+	
+    public void delete(RapportRdv id){ 
 		
 		String SQL = "DELETE FROM RapportRdv WHERE id=:id";
 		SQLQuery query = session.createSQLQuery(SQL);

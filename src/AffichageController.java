@@ -45,7 +45,7 @@ public class AffichageController implements ActionListener {
 	public AffichageController(affichage f, DAOAffichage daoAffichage, Utilisateur user) {
 		this.daoaffichage = daoAffichage;
 		this.fenetre = f;
-		this.user = user;
+		this.user = user; 
 	
 		
 		init();
@@ -53,12 +53,12 @@ public class AffichageController implements ActionListener {
 		fenetre.getBtnRecherche().addActionListener(this);
       	fenetre.getBtnDeconnexion().addActionListener(this);
 		fenetre.getBtnAfificherRdv().addActionListener(this);
+		
 		fenetre.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent evt) { 
-				// TODO Auto-generated method stub
-				//String msg = model.getValueAt(i,0).toString();
+				
 				
 				if (!evt.getValueIsAdjusting()) {  //This line prevents double events
 					 if (fenetre.getTable().getSelectedRow() > -1) {
@@ -75,11 +75,7 @@ public class AffichageController implements ActionListener {
 	
 	
     public void init() { 
-    	//Role user1 =daoaffichage.getUserRole(user.getIdrole()); 
-    	if (user.getIdrole().getId()==1) {
-			fenetre.getBtnAfificherRdv().setVisible(false);
-			fenetre.getLblAfificher().setVisible(false);
-		} 
+    
     	
     	fenetre.getLblNom().setText(user.getNom());
     	fenetre.getLblRole().setText(user.getIdrole().getLibelle());
@@ -119,13 +115,13 @@ public class AffichageController implements ActionListener {
     	
     }
     
-    public void doAffiche() {
+    public void doAffiche(Utilisateur user) {
     	SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
 		
 		try {
-			new RapportRdvController(new rapportRdv(), new DAORapportRdv(session, RapportRdv.class));
+			new RapportRdvController(new rapportRdv(), new DAORapportRdv(session, RapportRdv.class),user);
 		} catch (HibernateException e) {
 		// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -159,7 +155,7 @@ public class AffichageController implements ActionListener {
 			doDeconect();
 		}
 		if(src =="Afficher") {
-			doAffiche();
+			doAffiche(user);
 		}
 
 	}

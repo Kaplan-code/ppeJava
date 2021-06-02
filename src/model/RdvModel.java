@@ -18,8 +18,8 @@ public class RdvModel extends DefaultTableModel  {
 	public List<RapportRdv> rapports;
 	private String[] ColumnNames = {
 			"Date",
-			"Id_Utilisateur",
-			"Id_Medecin"
+			"Utilisateur",
+			"Medecin"
 	};
 	
 	public RdvModel(List<RapportRdv> rapports ) {

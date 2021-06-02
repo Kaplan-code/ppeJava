@@ -37,7 +37,7 @@ public class LoginController implements ActionListener {
 		init();
 		
 
-		fenetre.getBtnConnexion().addActionListener(this);
+		fenetre.getBtnConnexion().addActionListener(this); 
 		
 		
 	}
