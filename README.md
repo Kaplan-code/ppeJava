@@ -8,3 +8,6 @@ Sur l'IDE, aller dans les propriété du projet et ajouté toute les librairies 
 
 Changer s'il le faut le fichier "hibernate.cfg.xml" avec les informations correspondantes.
 
+Injecter le script sql :
+    
+    mysql  -u root < PPE2/sql/fichier.sql
