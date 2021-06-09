@@ -2,6 +2,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.transaction.SystemException;
 
 import DAO.DAORapportRdv;
@@ -39,7 +41,7 @@ public class RapportRdvController implements ActionListener {
 			rapports = daoRapportRdv.findUser(user);
 			rdvmodel = new RdvModel(rapports); 
 			fenetre.getTable().setModel(rdvmodel);
-			System.out.println(user);
+			//System.out.println(user);
 			fenetre.setVisible(true);
 			fenetre.getBtnSupprimer().setVisible(false);
 		} else {
@@ -68,18 +70,30 @@ public class RapportRdvController implements ActionListener {
 		//int column = 0;
 		
 		//int id = ((int) fenetre.getTable().getValueAt(row, column));
+        
+        if(fenetre.getTable().getSelectionModel().isSelectionEmpty()) {
+			JFrame frame = new JFrame("showMessageDialog");
+		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    JOptionPane.showMessageDialog(frame,
+		            "Aucune selection",
+		            "Ressayez",
+		            JOptionPane.ERROR_MESSAGE);
+		    
+		}
+		else {
 		
-		RapportRdv rapport = rapports.get(row);
-		
-		daoRapportRdv.delete(rapport);
-		
-        rapports = daoRapportRdv.findAll();
-		
-		rdvmodel = new RdvModel(rapports);
-		fenetre.getTable().setModel(rdvmodel);
-		
+			RapportRdv rapport = rapports.get(row);
+			
+			daoRapportRdv.delete(rapport);
+			
+	        rapports = daoRapportRdv.findAll();
+			
+			rdvmodel = new RdvModel(rapports);
+			fenetre.getTable().setModel(rdvmodel);
+			
 		
 
+	  }
 	}
 	
 
