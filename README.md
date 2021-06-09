@@ -11,3 +11,15 @@ Changer s'il le faut le fichier "hibernate.cfg.xml" avec les informations corres
 Injecter le script sql :
     
     mysql  -u root < PPE2/sql/fichier.sql
+
+Voici les comptes pour se connecter :
+
+-Compte délégue régional:
+
+    login : m
+    mdp  : 12
+
+-Compte visiteur :
+   
+    login : k
+    mdp  : 123
