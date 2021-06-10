@@ -29,6 +29,7 @@ import views.affichage;
 import views.connexion;
 import views.ficheMed;
 import views.rapportRdv;
+import views.users;
 
 public class AffichageController implements ActionListener {
 	affichage fenetre;
@@ -53,6 +54,8 @@ public class AffichageController implements ActionListener {
 		fenetre.getBtnRecherche().addActionListener(this);
       	fenetre.getBtnDeconnexion().addActionListener(this);
 		fenetre.getBtnAfificherRdv().addActionListener(this);
+		
+		fenetre.getBtnAfficher_nombre().addActionListener(this);
 		
 		fenetre.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
@@ -128,6 +131,18 @@ public class AffichageController implements ActionListener {
 		}
     }
     
+    public void doAfficheUsers() {
+    	SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		
+		try {
+			new VisiteurController(new users(), new DAOLogin(session, Utilisateur.class));
+		} catch (HibernateException e) {
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     public void TroisiemeFenetre(Medecin medecin, Utilisateur user) {
     	SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -156,6 +171,9 @@ public class AffichageController implements ActionListener {
 		}
 		if(src =="Afficher") {
 			doAffiche(user);
+		}
+		if(src =="Afficher_nombre") {
+			doAfficheUsers();
 		}
 
 	}

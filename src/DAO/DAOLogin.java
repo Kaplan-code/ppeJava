@@ -10,6 +10,8 @@ import org.hibernate.NonUniqueResultException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import entities.Medecin;
+import entities.RapportRdv;
 import entities.Utilisateur;
 
 public class DAOLogin extends DAOGeneric<Utilisateur> {
@@ -51,5 +53,28 @@ public class DAOLogin extends DAOGeneric<Utilisateur> {
 		return conect;
 		
 	}
+	
+	public List<Utilisateur> findAllUser(){
+		String SQL ="Select * FROM Utilisateur";
+		SQLQuery query = session.createSQLQuery(SQL);
+		query.addEntity(entityClass);
+		
+		List<Utilisateur> users = query.list();
+		
+		return users; 
+	}
+	
+	public Integer countMedecin(Integer utilisateurId) {
+		String SQL = "SELECT COUNT(medecinId) FROM RapportRdv WHERE utilisateurId =: utilisateurId";
+		SQLQuery query = session.createSQLQuery(SQL);
+		query.setInteger("utilisateurId", utilisateurId);
+		
+		Integer count = (Integer)query.uniqueResult();
+		
+		return count;
+	
+		
+	}
+	
 
 }
