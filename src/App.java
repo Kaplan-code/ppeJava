@@ -27,7 +27,7 @@ public class App {
 			new LoginController(new connexion(), new DAOLogin(session, Utilisateur.class));
 		} catch (HibernateException e) {
 		// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}		
 		
 		
