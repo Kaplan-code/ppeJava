@@ -15,6 +15,8 @@ import java.awt.TextField;
 import java.awt.Label;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class affichage extends JFrame {
 
@@ -28,6 +30,7 @@ public class affichage extends JFrame {
 	private JButton btnDeconnexion;
 	private JButton btnAfificherToutLes;
 	private JLabel lblAfificherToutLes;
+	private JButton btnAfficher;
 
 	/**
 	 * Launch the application.
@@ -130,6 +133,19 @@ public class affichage extends JFrame {
 		lblAfificherToutLes = new JLabel("Afificher tout les rendez-vous :");
 		lblAfificherToutLes.setBounds(12, 12, 225, 15);
 		contentPane.add(lblAfificherToutLes);
+		
+		JLabel lblAfficherLeNombre = new JLabel("Afficher le nombre de medecin par visiteur");
+		lblAfficherLeNombre.setBounds(22, 40, 319, 15);
+		contentPane.add(lblAfficherLeNombre);
+		
+		btnAfficher = new JButton("Afficher_nombre");
+		btnAfficher.setName("Afficher_nombre");
+		btnAfficher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnAfficher.setBounds(347, 44, 153, 25);
+		contentPane.add(btnAfficher);
 	}
 	public JTable getTable() {
 		return table;
@@ -154,5 +170,8 @@ public class affichage extends JFrame {
 	}
 	public JLabel getLblAfificher() {
 		return lblAfificherToutLes;
+	}
+	public JButton getBtnAfficher_nombre() {
+		return btnAfficher;
 	}
 }
